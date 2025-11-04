@@ -1,4 +1,4 @@
-FROM docker.io/blackdex/rust-musl:x86_64-musl-stable-1.91.0 as build
+FROM docker.io/blackdex/rust-musl:x86_64-musl-stable-1.91.0 AS build
 
 COPY . /home/rust/src
 
@@ -10,7 +10,7 @@ RUN cargo build --release
 FROM scratch
 
 WORKDIR /
-COPY --from=build /home/rust/src/target/aarch64-unknown-linux-musl/release/my-application-name .
+COPY --from=build /home/rust/src/target/x86_64-unknown-linux-musl/release/my_tracy_musl .
 
-CMD ["/my-application-name"]
+CMD ["/my_tracy_musl"]
 
