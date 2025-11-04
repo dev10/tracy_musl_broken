@@ -1,0 +1,16 @@
+FROM docker.io/blackdex/rust-musl:aarch64-musl as build
+
+COPY . /home/rust/src
+
+# If you want to use PostgreSQL v15 add and uncomment the following ENV
+# ENV PQ_LIB_DIR="/usr/local/musl/pq15/lib"
+
+RUN cargo build --release
+
+FROM scratch
+
+WORKDIR /
+COPY --from=build /home/rust/src/target/aarch64-unknown-linux-musl/release/my-application-name .
+
+CMD ["/my-application-name"]
+
