@@ -8,7 +8,7 @@ on:
 jobs:
   build_container:
     runs-on: ubuntu-latest
-    container: ghcr.io/blackdex/rust-musl:x86_64-musl-stable
+    container: ghcr.io/blackdex/rust-musl:x86_64-musl-stable-1.91.0
     steps:
       - uses: actions/checkout@v4
       - name: Build
